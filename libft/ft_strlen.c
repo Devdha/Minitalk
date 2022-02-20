@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2021/11/10 01:02:18 by dha               #+#    #+#             */
+/*   Updated: 2021/11/28 19:42:36 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	
+	const char	*cp;
+
+	cp = s;
+	while (*cp)
+		cp++;
+	return (cp - s);
 }

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2021/11/24 23:16:44 by dha               #+#    #+#             */
+/*   Updated: 2021/11/28 19:42:58 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstnew(void *content)
 {
-	
+	t_list	*ret;
+
+	ret = (t_list *) malloc(sizeof(t_list));
+	if (ret == 0)
+		return (0);
+	ret -> content = content;
+	ret -> next = 0;
+	return (ret);
 }

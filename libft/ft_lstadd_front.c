@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2021/11/24 23:16:32 by dha               #+#    #+#             */
+/*   Updated: 2022/02/13 15:53:06 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	
+	if (lst == 0 || new == 0)
+		return ;
+	new -> next = *lst;
+	*lst = new;
 }

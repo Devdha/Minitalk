@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2022/02/10 16:49:30 by dha               #+#    #+#             */
+/*   Updated: 2022/02/10 19:34:38 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isnum(const char *s)
 {
-	
+	int	i;
+
+	i = 0;
+	if (s[i] == '+' || s[i] == '-')
+		i++;
+	if (s[i] == '\0')
+		return (0);
+	while (s[i] != '\0')
+	{
+		if (!ft_isdigit(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

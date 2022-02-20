@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2021/11/24 23:16:49 by dha               #+#    #+#             */
+/*   Updated: 2021/11/29 12:51:48 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_lstsize(t_list *lst)
 {
-	
+	int		size;
+	t_list	*curr;
+
+	size = 0;
+	curr = lst;
+	while (curr)
+	{
+		curr = curr -> next;
+		size++;
+	}
+	return (size);
 }

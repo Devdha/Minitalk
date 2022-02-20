@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: dha <dha@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2021/11/16 19:57:06 by dha               #+#    #+#             */
+/*   Updated: 2021/11/29 17:15:29 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
-
-int	main(int argc, char **argv)
+char	*ft_strrchr(const char *s, int c)
 {
-	
+	char	*start;
+
+	start = (char *) s;
+	while (*s)
+		s++;
+	if (c == '\0')
+		return ((char *) s);
+	while (--s >= start)
+	{
+		if (*s == (char) c)
+			return ((char *) s);
+	}
+	return (0);
 }

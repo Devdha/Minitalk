@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstdel_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:46 by dha              ###   ########seoul.kr  */
+/*   Created: 2022/01/27 19:39:41 by dha               #+#    #+#             */
+/*   Updated: 2022/02/05 21:22:26 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstdel_back(t_list **lst)
 {
-	
+	t_list	*tmp;
+
+	if (lst == 0 || *lst == 0)
+		return ;
+	tmp = ft_lst_beforelast(*lst);
+	if (tmp -> next)
+		tmp -> next = NULL;
+	else
+		*lst = NULL;
 }
