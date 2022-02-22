@@ -6,13 +6,13 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:01 by dha               #+#    #+#             */
-/*   Updated: 2022/02/20 21:32:43 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/22 15:55:55 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "minitalk.h"
 
 int	main(int argc, char **argv)
 {
-	
+	show_pid(1);
 }

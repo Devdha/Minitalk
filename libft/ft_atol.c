@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 18:38:28 by dha               #+#    #+#             */
-/*   Updated: 2022/02/11 16:21:28 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/22 15:51:01 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,25 @@ static int	is_space(char c)
 	return (0);
 }
 
-long long	ft_atoll(const char *str)
+long	ft_atol(const char *str)
 {
-	long long	tot;
-	int			sign;
+	unsigned long	tot;
+	int				sign;
 
 	sign = 1;
 	tot = 0;
 	while (is_space(*str))
 		str++;
-	if (*str == '-')
-		sign = -1;
+	sign = 1 - (*str == '-' << 1);
 	str += (*str == '-' || *str == '+');
-	while (*str != '\0')
+	while (*str >= '0' && *str <= '9')
 	{
-		if (*str < '0' || *str > '9')
-			break ;
-		if (tot > 922337203685477581 || tot < -922337203685477581)
-			return (-1);
-		tot = tot * 10 + (*str - '0') * sign;
-		if ((sign > 0 && tot < 0) || (sign < 0 && tot > 0))
-			return (-1);
+		if (tot > (unsigned long) LONG_MAX / 10 + (sign < 0))
+			return ((sign < 0) - 1);
+		tot = tot * 10;
+		if (tot > (unsigned long) LONG_MAX - (*str - '0') + (sign < 0))
+			return ((sign < 0) - 1);
 		str++;
 	}
-	return (tot);
+	return (tot * sign);
 }

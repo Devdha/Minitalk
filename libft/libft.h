@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:42:38 by dha               #+#    #+#             */
-/*   Updated: 2022/02/19 14:45:56 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/22 15:49:41 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 # define BUFFER_SIZE 16
 
 typedef struct s_list
@@ -69,7 +70,7 @@ char		*get_next_line(int fd);
 void		ft_lstdel_back(t_list **lst);
 void		ft_lstdel_front(t_list **lst);
 t_list		*ft_lst_beforelast(t_list *lst);
-long long	ft_atoll(const char *str);
+long		ft_atol(const char *str);
 int			ft_numlen(long long n);
 int			ft_isnum(const char *s);
 

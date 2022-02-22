@@ -6,7 +6,7 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/20 19:42:00 by dha               #+#    #+#              #
-#    Updated: 2022/02/20 21:31:09 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/02/22 16:00:48 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,23 +24,25 @@ LIBFT = $(LIBFT_DIR)/lib$(LIBFT_NAME).a
 
 OBJ_DIR = ./obj
 
-SERVER_SRCS = server.c
-SERVER_INCS = server.h
+SERVER_SRCS = server.c \
+				talk_utils.c
+SERVER_INCS = minitalk.h
 SERVER_OBJS = $(addprefix $(OBJ_DIR)/, $(SERVER_SRCS:.c=.o))
 
-CLIENT_SRCS = client.c
-CLIENT_INCS = client.h
+CLIENT_SRCS = client.c \
+				talk_utils.c
+CLIENT_INCS = minitalk.h
 CLIENT_OBJS = $(addprefix $(OBJ_DIR)/, $(CLIENT_SRCS:.c=.o))
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(SERVER) $(CLIENT)
+$(NAME) : $(SERVER) $(CLIENT)
 
-$(SERVER) : $(SERVER_OBJS) $(SERVER_INCS)
+$(SERVER) : $(LIBFT) $(SERVER_OBJS) $(SERVER_INCS)
 	@$(CC) $(CFLAGS) -I ./ $(SERVER_OBJS) -L $(LIBFT_DIR) -l$(LIBFT_NAME) -o $@
 	@printf "💡 Make $(SERVER) Done\n"
 
-$(CLIENT) : $(CLIENT_OBJS) $(CLIENT_INCS)
+$(CLIENT) : $(LIBFT) $(CLIENT_OBJS) $(CLIENT_INCS)
 	@$(CC) $(CFLAGS) -I ./ $(CLIENT_OBJS) -L $(LIBFT_DIR) -l$(LIBFT_NAME) -o $@
 	@printf "💡 Make $(CLIENT) Done\n"
 
