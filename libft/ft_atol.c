@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 18:38:28 by dha               #+#    #+#             */
-/*   Updated: 2022/02/22 15:51:01 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/23 19:57:52 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ long	ft_atol(const char *str)
 		tot = tot * 10;
 		if (tot > (unsigned long) LONG_MAX - (*str - '0') + (sign < 0))
 			return ((sign < 0) - 1);
+		tot += *str - '0';
 		str++;
 	}
 	return (tot * sign);

@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:42:38 by dha               #+#    #+#             */
-/*   Updated: 2022/02/22 15:49:41 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/23 16:54:33 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char		**ft_split(char const *s, char c);
 char		*ft_itoa(int n);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
-void		ft_putchar_fd(char c, int fd);
-void		ft_putstr_fd(char *s, int fd);
-void		ft_putendl_fd(char *s, int fd);
+void		ft_putchar_fd(const char c, int fd);
+void		ft_putstr_fd(const char *s, int fd);
+void		ft_putendl_fd(const char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
