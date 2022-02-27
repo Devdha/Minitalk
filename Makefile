@@ -6,12 +6,12 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/20 19:42:00 by dha               #+#    #+#              #
-#    Updated: 2022/02/26 21:28:59 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/02/27 23:11:44 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC = CC
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 CFLAGS = -Werror
 AR = ar rcs
 RM = rm -rf

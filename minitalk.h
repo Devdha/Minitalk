@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:43:33 by dha               #+#    #+#             */
-/*   Updated: 2022/02/27 16:24:49 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/27 22:59:06 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 # include <signal.h>
-# include <stdio.h>
 
 typedef struct sigaction	t_sigact;
 

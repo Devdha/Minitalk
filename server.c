@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:01 by dha               #+#    #+#             */
-/*   Updated: 2022/02/27 21:54:00 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/27 23:02:06 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,20 @@
 
 static void	init_sigact(void);
 
+static void	end_recv(pid_t pid)
+{
+	write(1, "\n", 1);
+	kill(pid, SIGUSR2);
+}
+
 static void	recv_msg(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	ch;
 	static int				recv;
+	static pid_t			pid;
 
+	if (!ch && !recv)
+		pid = info->si_pid;
 	recv++;
 	if (sig == SIGUSR1)
 		ch &= ~(1 << (8 - recv));
@@ -28,8 +37,7 @@ static void	recv_msg(int sig, siginfo_t *info, void *context)
 	{
 		if (!ch)
 		{
-			write(1, "\n", 1);
-			kill(info->si_pid, SIGUSR2);
+			end_recv(pid);
 			init_sigact();
 			ch = 0;
 			recv = 0;
@@ -38,7 +46,7 @@ static void	recv_msg(int sig, siginfo_t *info, void *context)
 		write(1, &ch, 1);
 		recv = 0;
 	}
-	kill(info->si_pid, SIGUSR1);
+	kill(pid, SIGUSR1);
 }
 
 static void	connection(int sig, siginfo_t *info, void *context)

@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/02/27 17:53:51 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/02/27 23:15:57 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	getbit(void)
 {
 	static int	i = 0;
 	static int	recv = 0;
-	
+
 	recv++;
 	if (recv > 8)
 	{
@@ -61,7 +61,7 @@ static void	check_connect(int sig, siginfo_t *info, void *context)
 		error_exit("[Error] Sigaction failed its work.");
 	bit = getbit();
 	if (!bit)
-		kill(g_info.server_pid, SIGUSR1); 
+		kill(g_info.server_pid, SIGUSR1);
 	else
 		kill(g_info.server_pid, SIGUSR2);
 }
