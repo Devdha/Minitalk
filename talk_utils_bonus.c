@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   talk_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 19:43:33 by dha               #+#    #+#             */
-/*   Updated: 2022/02/28 00:50:43 by dha              ###   ########seoul.kr  */
+/*   Created: 2022/02/22 15:24:02 by dha               #+#    #+#             */
+/*   Updated: 2022/02/28 00:49:31 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "minitalk_bonus.h"
 
-# include "libft.h"
-# include <signal.h>
-
-typedef struct sigaction	t_sigact;
-
-typedef struct s_info
+void	error_exit(const char *str)
 {
-	unsigned char	*str;
-	pid_t			server_pid;
-}				t_info;
+	ft_putendl_fd(str, 2);
+	exit(EXIT_FAILURE);
+}
 
-void	show_pid(int is_server);
-void	error_exit(const char *str);
+void	show_pid(int is_server)
+{
+	int	pid;
 
-#endif
+	if (is_server)
+		ft_putstr_fd("Server PID: ", 1);
+	else
+		ft_putstr_fd("Client PID: ", 1);
+	pid = getpid();
+	ft_putnbr_fd(pid, 1);
+	write(1, "\n", 1);
+}

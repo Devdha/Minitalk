@@ -6,36 +6,49 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/20 19:42:00 by dha               #+#    #+#              #
-#    Updated: 2022/02/27 23:11:44 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/02/28 01:29:32 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-CC = CC
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -Werror
 AR = ar rcs
 RM = rm -rf
 NAME = minitalk
 SERVER = server
 CLIENT = client
 
+OBJ_DIR = ./obj
+
+SERVER_BONUS_SRCS = server_bonus.c \
+			talk_utils_bonus.c
+CLIENT_BONUS_SRCS = client_bonus.c \
+			talk_utils_bonus.c
+SERVER_SRCS = server.c \
+			talk_utils.c
+CLIENT_SRCS = client.c \
+			talk_utils.c
+
+ifdef IS_BONUS
+	SERVER_INCS = minitalk_bonus.h
+	SERVER_OBJS = $(addprefix $(OBJ_DIR)/, $(SERVER_BONUS_SRCS:.c=.o))
+	CLIENT_INCS = minitalk_bonus.h
+	CLIENT_OBJS = $(addprefix $(OBJ_DIR)/, $(CLIENT_BONUS_SRCS:.c=.o))
+else
+	SERVER_INCS = minitalk.h
+	SERVER_OBJS = $(addprefix $(OBJ_DIR)/, $(SERVER_SRCS:.c=.o))
+	CLIENT_INCS = minitalk.h
+	CLIENT_OBJS = $(addprefix $(OBJ_DIR)/, $(CLIENT_SRCS:.c=.o))
+endif
+
 LIBFT_DIR = ./libft
 LIBFT_NAME = ft
 LIBFT = $(LIBFT_DIR)/lib$(LIBFT_NAME).a
 
-OBJ_DIR = ./obj
-
-SERVER_SRCS = server.c \
-				talk_utils.c
-SERVER_INCS = minitalk.h
-SERVER_OBJS = $(addprefix $(OBJ_DIR)/, $(SERVER_SRCS:.c=.o))
-
-CLIENT_SRCS = client.c \
-				talk_utils.c
-CLIENT_INCS = minitalk.h
-CLIENT_OBJS = $(addprefix $(OBJ_DIR)/, $(CLIENT_SRCS:.c=.o))
-
 all : $(NAME)
+
+bonus :
+	@make IS_BONUS=1 all
 
 $(NAME) : $(SERVER) $(CLIENT)
 
@@ -66,7 +79,7 @@ re : fclean all
 
 rr : wclean all
 
-.PHONY : all clean fclean wclean re rr $(LIBFT_NAME)_clean $(LIBFT_NAME)_fclean
+.PHONY : all clean fclean wclean re rr $(LIBFT_NAME)_clean $(LIBFT_NAME)_fclean bonus
 
 $(LIBFT) :
 	@make -C $(LIBFT_DIR)
