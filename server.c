@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:01 by dha               #+#    #+#             */
-/*   Updated: 2022/02/28 01:39:33 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 11:49:19 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 static void	init_sigact(void);
 
-static void	end_recv(pid_t pid)
+static int	handle_char(unsigned char *ch, int *recv)
 {
-	write(1, "\n", 1);
-	kill(pid, SIGUSR2);
-	init_sigact();
+	if (*recv == 8) // when 8 bits received
+	{
+		if (!(*ch)) // if ch == NULL
+		{
+			write(1, "\n", 1); // output newline
+			init_sigact(); // reset signal handler to connect new client
+			*ch = 0;
+			*recv = 0;
+			return (0);
+		}
+		write(1, ch, 1); // if ch is some character, output the char
+		*recv = 0;	// reset received bit count to 0
+	}
+	return (1);
 }
 
 static void	recv_msg(int sig, siginfo_t *info, void *context)
@@ -30,24 +41,24 @@ static void	recv_msg(int sig, siginfo_t *info, void *context)
 	(void) context;
 	if (!ch && !recv)
 		pid = info->si_pid;
-	recv++;
-	if (sig == SIGUSR1)
-		ch &= ~(1 << (8 - recv));
-	else if (sig == SIGUSR2)
-		ch |= (1 << (8 - recv));
-	if (recv == 8)
+	// check sender's pid(sometimes OS control signal, at that time info->si_pid is 0)
+	if (pid == info->si_pid || info->si_pid == 0)
 	{
-		if (!ch)
-		{
-			end_recv(pid);
-			ch = 0;
-			recv = 0;
-			return ;
-		}
-		write(1, &ch, 1);
-		recv = 0;
+		recv++;
+		if (sig == SIGUSR1)
+			ch &= ~(1 << (8 - recv));
+		else if (sig == SIGUSR2)
+			ch |= (1 << (8 - recv));
+		if (handle_char(&ch, &recv))
+			// send signal to notify signal sent by client is confirmed
+			kill(pid, SIGUSR1);
+		else
+			// if all str received, send signal to terminate the client
+			kill(pid, SIGUSR2);
 	}
-	kill(pid, SIGUSR1);
+	else
+		// if pid is not match with client, terminate process which is sending signal
+		kill(info->si_pid, SIGUSR2);
 }
 
 static void	connection(int sig, siginfo_t *info, void *context)
@@ -61,7 +72,7 @@ static void	connection(int sig, siginfo_t *info, void *context)
 	ft_putstr_fd("Connect to client(PID: ", 1);
 	ft_putnbr_fd(client_pid, 1);
 	ft_putendl_fd(") successfully", 1);
-	sigact.sa_flags = SA_SIGINFO;
+	sigact.sa_flags = SA_SIGINFO | SA_RESTART;
 	sigact.sa_sigaction = recv_msg;
 	if (sigaction(SIGUSR1, &sigact, NULL) == -1
 		|| sigaction(SIGUSR2, &sigact, NULL) == -1)

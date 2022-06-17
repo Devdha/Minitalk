@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/06/17 10:08:36 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 11:49:58 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	check_connect(int signo)
 
 void	init_sigact(void)
 {
-	if (signal(SIGUSR1, check_connect) == SIG_ERR)
+	if (signal(SIGUSR1, check_connect) == SIG_ERR) // when signal() failed, it returns SIG_ERR
 		error_exit("[Error] Sigaction failed its work.");
 }
 
