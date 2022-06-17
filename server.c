@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:01 by dha               #+#    #+#             */
-/*   Updated: 2022/06/17 11:49:19 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/06/17 13:38:40 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	handle_char(unsigned char *ch, int *recv)
 {
 	if (*recv == 8) // when 8 bits received
 	{
-		if (!(*ch)) // if ch == NULL
+		if (!(*ch)) // if ch == \0
 		{
 			write(1, "\n", 1); // output newline
 			init_sigact(); // reset signal handler to connect new client
@@ -26,7 +26,7 @@ static int	handle_char(unsigned char *ch, int *recv)
 			*recv = 0;
 			return (0);
 		}
-		write(1, ch, 1); // if ch is some character, output the char
+		write(1, ch, 1); // if ch is some character, output the ch.
 		*recv = 0;	// reset received bit count to 0
 	}
 	return (1);
@@ -53,11 +53,11 @@ static void	recv_msg(int sig, siginfo_t *info, void *context)
 			// send signal to notify signal sent by client is confirmed
 			kill(pid, SIGUSR1);
 		else
-			// if all str received, send signal to terminate the client
+			// if all string received, send signal to terminate the client
 			kill(pid, SIGUSR2);
 	}
 	else
-		// if pid is not match with client, terminate process which is sending signal
+		// if pid is not match with current client, terminate process which is sending signal
 		kill(info->si_pid, SIGUSR2);
 }
 
