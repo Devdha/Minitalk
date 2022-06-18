@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/06/18 14:34:46 by dha              ###   ########.fr       */
+/*   Updated: 2022/06/18 15:31:46 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void check_connect(int signo)
 	ft_putendl_fd(") successfully", 1);
 	// before: sigaction() -> after: signal()
 	if (signal(SIGUSR1, send_msg) == SIG_ERR || signal(SIGUSR2, send_msg) == SIG_ERR)
-		error_exit("[Error] Sigaction failed its work.");
+		error_exit("[Error] Signal failed its work.");
 	bit = getbit();
 	if (!bit)
 		kill(g_info.server_pid, SIGUSR1);
@@ -69,7 +69,7 @@ void init_sigact(void)
 	// It doesn't need to use siginfo and context in signal handler,
 	// so sigaction() is substituted to signal().
 	if (signal(SIGUSR1, check_connect) == SIG_ERR) // when signal() failed, it returns SIG_ERR
-		error_exit("[Error] Sigaction failed its work.");
+		error_exit("[Error] Signal failed its work.");
 }
 
 int main(int argc, char **argv)
