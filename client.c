@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/06/18 15:31:46 by dha              ###   ########.fr       */
+/*   Updated: 2022/06/18 15:44:28 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int main(int argc, char **argv)
 	g_info.str = (unsigned char *)argv[2];
 	show_pid(0);
 	init_sigact();
-	kill(g_info.server_pid, SIGUSR1);
+	ft_kill(g_info.server_pid, SIGUSR1);
 	while (1)
 		pause();
 }
