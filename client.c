@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:42:02 by dha               #+#    #+#             */
-/*   Updated: 2022/06/17 13:36:37 by dha              ###   ########.fr       */
+/*   Updated: 2022/06/18 14:34:46 by dha              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 	if (argc != 3)
 		error_exit("[Error] Wrong parameters(./client [server PID] [msg])");
 	g_info.server_pid = ft_atoi(argv[1]);
-	if (g_info.server_pid < 100 || g_info.server_pid > 100000)
+	if (g_info.server_pid < 100 || g_info.server_pid > 99998)
 		error_exit("[Error] Invalid PID");
 	g_info.str = (unsigned char *)argv[2];
 	show_pid(0);
